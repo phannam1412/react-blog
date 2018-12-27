@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "81:80"
+      - "3307:3306"
+    volumes:
+      - ./:/app
+      - ./supporting_files/run.sh:/run.sh
+    working_dir: /app
+    environment:
+      - MYSQL_ADMIN_PASS=admin
