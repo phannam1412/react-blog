@@ -1,6 +1,7 @@
 #!/bin/bash
 
 composer install
+php artisan serve
 
 # fix file mode and directory mode
 # find /var/www/html -type d -print0 | xargs -0 chmod 0775

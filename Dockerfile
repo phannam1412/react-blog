@@ -26,12 +26,21 @@ RUN add-apt-repository -y ppa:ondrej/php && \
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C && \
   apt-get update && \
   apt-get -y upgrade && \
-  apt-get -y install supervisor wget git apache2 php-xdebug libapache2-mod-php7.2 mysql-server php7.2 php7.2-mysql pwgen php7.2-apc php7.2-gd php7.2-xml php7.2-mbstring php7.2-gettext zip unzip php7.2-zip curl php7.2-curl && \
+  apt-get -y install supervisor wget git apache2 php-xdebug libapache2-mod-php7.1 mysql-server php7.1 php7.1-mysql pwgen php7.1-apc php7.1-gd php7.1-xml php7.1-mbstring php7.1-gettext zip unzip php7.1-zip curl php7.1-curl php7.1-mcrypt && \
   apt-get -y autoremove && \
   echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# Install mycrypt - required by Laravel
+#RUN apt-get -y install php-dev libmcrypt-dev php-pear
+#RUN pecl channel-update pecl.php.net
+#RUN pecl install mcrypt-1.0.1
+#RUN echo "extension=mcrypt.so" >> /etc/php/7.2/cli/php.ini
+#RUN apt-get -y install gcc make autoconf libc-dev pkg-config
+#RUN apt-get -y install php7.1-dev
+#RUN apt-get -y install libmcrypt-dev
+
 # Update CLI PHP to use 7.2
-RUN ln -sfn /usr/bin/php7.2/etc/alternatives/php
+RUN ln -sfn /usr/bin/php7.1/etc/alternatives/php
 
 # Add image configuration and scripts
 ADD supporting_files/start-apache2.sh /start-apache2.sh

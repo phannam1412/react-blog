@@ -1,16 +1,21 @@
 version: '2'
 
+networks:
+  bridge:
+    driver: bridge
+
 services:
   webapp:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "81:80"
-      - "3307:3306"
+      - "8000:8000"
     volumes:
       - ./:/app
       - ./supporting_files/run.sh:/run.sh
     working_dir: /app
     environment:
       - MYSQL_ADMIN_PASS=admin
+    networks:
+      - bridge
